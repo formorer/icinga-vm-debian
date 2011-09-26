@@ -6,3 +6,5 @@ rsync
 postfix
 lsb-release
 icinga
+mysql-server
+icinga-idoutils
