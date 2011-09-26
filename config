@@ -1,0 +1,173 @@
+# Filename:      /etc/debootstrap/config
+# Purpose:       configuration file for grml-debootstrap
+# Authors:       grml-team (grml.org), (c) Michael Prokop <mika@grml.org>
+# Bug-Reports:   see http://grml.org/bugs/
+# License:       This file is licensed under the GPL v2.
+################################################################################
+
+################################################################################
+# Important: you definitely have to adjust the following variables!
+################################################################################
+## The most important question: target of the new Debian system
+## Where should Debian be installed to?
+#
+# Usually you want to use a partition. If you specify a string *without* /dev/
+# in the beginning, grml-debootstrap assumes you want to install Debian into a
+# directory. If so then MKFS, TUNE2FS, GRUB and FSCK won't apply, no matter of
+# the configuration variables. Make sure the TARGET-directory is on a partition
+# with present dev and exec mount options.
+#
+# usage examples:
+# TARGET='/dev/hda1'
+# TARGET='/mnt/grml'
+TARGET=''
+
+## Do you want to install grub? Just specify the device you'd like to use.
+## Example: Specify /dev/sda to install into MBR (master boot record) of
+## /dev/sda. If you do not set the variable grub will not be installed.
+## Please note that grub can NOT be installed into a partition (like /dev/sda2)
+## but in the master boot record only (/dev/sda, /dev/sdb,...).
+# Usage example:
+# GRUB='/dev/sda'
+GRUB=''
+
+# specifiy additional bootparameters for usage in grub 
+# e.g. "pci=nomsi"
+BOOT_APPEND=''
+
+################################################################################
+# Now the variables you might want to adjust, but need not to...
+
+# set mirror where debootstrap and chrootscript should download
+# packages from; if empty an existing
+# /etc/debootstrap/etc/apt/sources.list is used instead
+# MIRROR='ftp://ftp.de.debian.org/debian'
+MIRROR='http://cdn.debian.net/debian'
+
+# specify directory of loopback mounted Debian-ISO so you don't
+# have to download all the core packages via network but can
+# use an available Debian-ISO instead
+# ISO='file:/mnt/iso/debian/'
+
+# If /etc/apt/sources.list should NOT be build on the fly, this
+# options allows providing a separate apt file via
+# /etc/debootstrap/etc/apt/sources.list
+# KEEP_SRC_LIST='yes'
+
+# add grml repository to /etc/apt/sources.list
+# if empty then the repository won't be added (notice: in testing phase)
+# GRMLREPOS='yes'
+
+# install packages from grml-pool? requires activated $GRMLREPOS from above
+# if empty nothing will be added (notice: in testing phase)
+# GRMLPACKAGES='grml-etc-core'
+
+# release (which Debian version should be installed)
+# supported values: lenny (old-stable), squeeze (stable),
+#                   wheezy (testing), sid (unstable)
+RELEASE='squeeze'
+
+# define components that should be used within sources.list
+# default:
+# COMPONENTS='main contrib non-free'
+
+# architecture
+# if unset the default of the running system (see 'dpkg --print-architecture') will be taken
+# notice: installing an amd64 system requires a 64bit kernel
+#         do not forget to adjust $KERNEL for selected architecture as well
+# ARCH='amd64'
+
+# hostname of new system
+HOSTNAME='icinga'
+
+# kernel version which should be installed
+# do not forget to adjust according to architecture, for example
+# use 2.6-686 for i386 and 2.6-amd64 for amd64
+# KERNEL='2.6-686'
+
+# set password of user root without prompting, please use with caution
+# only, because you usually don't want to share your password(s) ;-)
+ROOTPASSWORD='icinga'
+
+# name of debootstrap executable
+# supported values: debootstrap cdebootstrap
+DEBOOTSTRAP='debootstrap'
+
+# check signature of release file per default
+# set to any other value then yes to disable signature checks.
+SECURE='yes'
+
+# To pass extra parameters to the debootstrap command. This feature allows
+# grml-debootstrap to pass extra parameters, e.g., --include=, --exclude=,
+# --components=, etc to debootstrap. E.g.,
+# DEBOOTSTRAP_OPT='--include=debconf-utils,locales,pciutils --exclude=nano,tasksel,tasksel-data,iptables'
+
+# Which debconf-frontend should be used?
+DEBIAN_FRONTEND='noninteractive'
+
+# execute aptitude/apt-get with any special options?
+# DPKG_OPTIONS='-o APT::Get::AllowUnauthenticated=true -o aptitude::Cmdline::ignore-trust-violations=yes'
+
+# The single steps/stages of grml-deboostrap are stored inside /var/cache/grml-debootstrap
+# by default. Use another directory instead?
+# STAGES='/var/cache/grml-debootstrap'
+
+# install packages defined in /etc/debootstrap/packages?
+PACKAGES='yes'
+
+# pre-seed packages using /etc/debootstrap/debconf-selections (if exist)?
+DEBCONF='yes'
+
+# execute scripts from /etc/debootstrap/chroot-scripts/ inside the chroot?
+CHROOT_SCRIPTS='yes'
+#
+# execute scripts from /etc/debootstrap/pre-scripts/ before setting up chroot?
+PRE_SCRIPTS='yes'
+
+# execute scripts from /etc/debootstrap/scripts/ after setting up chroot?
+SCRIPTS='yes'
+
+# install extra packages (.deb) from /etc/debootstrap/extrapackages/?
+EXTRAPACKAGES='yes'
+
+# place of config files for debootstrap
+CONFFILES='/etc/debootstrap'
+
+# mount point where chroot actions should take place
+# MNTPOINT='/mnt/debootstrap'
+
+# executable which should be run on $TARGET
+# unset it if you do not want to use it
+MKFS='mkfs.ext3'
+
+# deactivate automatic filesystem check on $TARGET?
+# unset it if you do not want to use it
+TUNE2FS='tune2fs -c0 -i0'
+
+# check filesystem when chroot stuff finished?
+FSCK='no'
+
+# which tool should be used for fsck? if unset the tool will be guessed based on $MKFS
+# FSCKTOOL=''
+
+# which packages do you want do dpkg-reconfigure?
+# RECONFIGURE='locales console-data'
+RECONFIGURE='console-data'
+
+# use /etc/debootstrap/locale.gen for configuration of locales?
+LOCALES='yes'
+
+# use /usr/share/zoneinfo/$TIMEZONE for /etc/localtime
+TIMEZONE='Europe/Vienna'
+
+# remove apt cache in chroot after installation of packages finished?
+RM_APTCACHE='yes'
+
+# generate initrd via update-initramfs?
+INITRD='yes'
+
+# this file contains information that has been caught during
+# installation and will be displayed at the end of the installation
+INSTALL_NOTES='/etc/debootstrap/install_notes'
+
+## END OF FILE #################################################################

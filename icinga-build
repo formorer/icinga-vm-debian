@@ -1,0 +1,17 @@
+#!/bin/bash
+
+IMAGE=$1
+
+if [ -z "$1" ]
+then
+    echo "usage: icinga-build <image>"
+    exit 1
+fi
+
+sudo grml-debootstrap \
+    -r squeeze \
+     -m http://localhost:9999/debian \
+     -d $(pwd) \
+     --vmfile \
+     --vmsize 5G \
+     --target $IMAGE

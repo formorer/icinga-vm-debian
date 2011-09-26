@@ -1,0 +1,4 @@
+icinga-cgi  icinga/adminpassword-repeat password    
+icinga-cgi  icinga/adminpassword    password    
+icinga-cgi  icinga/adminpassword-mismatch   error   
+icinga-cgi    icinga/httpd    multiselect apache2
