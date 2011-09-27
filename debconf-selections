@@ -1,5 +1,5 @@
-icinga-cgi  icinga/adminpassword-repeat password    
-icinga-cgi  icinga/adminpassword    password    
+icinga-cgi  icinga/adminpassword-repeat password   icinga
+icinga-cgi  icinga/adminpassword    password    icinga
 icinga-cgi  icinga/adminpassword-mismatch   error   
 icinga-cgi    icinga/httpd    multiselect apache2
 
@@ -9,8 +9,6 @@ icinga-idoutils icinga-idoutils/mysql/admin-pass    password
 # MySQL application password for icinga-idoutils:
 icinga-idoutils icinga-idoutils/mysql/app-pass  password    
 icinga-idoutils icinga-idoutils/pgsql/admin-pass    password    
-# PostgreSQL application password for icinga-idoutils:
-icinga-idoutils icinga-idoutils/pgsql/app-pass  password    
 # Perform upgrade on database for icinga-idoutils with dbconfig-common?
 icinga-idoutils icinga-idoutils/dbconfig-upgrade    boolean true
 # Connection method for MySQL database of icinga-idoutils:
@@ -18,7 +16,7 @@ icinga-idoutils icinga-idoutils/mysql/method    select  unix socket
 #  database name for icinga-idoutils:
 icinga-idoutils icinga-idoutils/db/dbname   string  icinga
 # Deconfigure database for icinga-idoutils with dbconfig-common?
-icinga-idoutils icinga-idoutils/dbconfig-remove boolean 
+icinga-idoutils icinga-idoutils/dbconfig-remove boolean false 
 icinga-idoutils icinga-idoutils/upgrade-error   select  abort
 # Connection method for PostgreSQL database of icinga-idoutils:
 icinga-idoutils icinga-idoutils/pgsql/method    select  unix socket
@@ -38,11 +36,6 @@ icinga-idoutils icinga-idoutils/remove-error    select  abort
 icinga-idoutils icinga-idoutils/purge   boolean false
 # Configure database for icinga-idoutils with dbconfig-common?
 icinga-idoutils icinga-idoutils/dbconfig-install    boolean true
-icinga-idoutils icinga-idoutils/pgsql/manualconf    note    
-icinga-idoutils icinga-idoutils/passwords-do-not-match  error   
-icinga-idoutils icinga-idoutils/pgsql/changeconf    boolean false
-icinga-idoutils icinga-idoutils/pgsql/authmethod-user   select  password
-icinga-idoutils icinga-idoutils/pgsql/no-empty-passwords    error   
 #  username for icinga-idoutils:
 icinga-idoutils icinga-idoutils/db/app-user string  icinga-idoutils
 #  storage directory for icinga-idoutils:
@@ -52,6 +45,3 @@ icinga-idoutils icinga-idoutils/remote/host select
 # Database type to be used by icinga-idoutils:
 icinga-idoutils icinga-idoutils/database-type   select  mysql
 icinga-idoutils icinga-idoutils/mysql/admin-user    string  root
-# Host running the  server for icinga-idoutils:
-icinga-idoutils icinga-idoutils/remote/newhost  string  
-
